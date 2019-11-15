@@ -1,16 +1,15 @@
 import React, { PureComponent } from 'react';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import {Input} from '@material-ui/core';
-import checkmark from '../../assets/checkmark.jpg';
-import error from '../../assets/error.jpg';
-import './styles.css';
 import ResultDialog from '../resultDialog/ResultDialog';
+import './styles.css';
 
 class ImagePreview extends PureComponent {
     state = {
         hotdog: null,
         classificationInfo: '',
-        image: null
+        image: null,
+        showResults: false
     };
 
     constructor(props) {
@@ -65,7 +64,7 @@ class ImagePreview extends PureComponent {
         this.setState({hotdog, classificationInfo: classifications});
     };
 
-    hideResultDialog = () => this.setState({showResults: false});
+    hideResultDialog = () => this.setState({showResults: false, hotdog: null, classifications: '', image: null});
     showResultDialog = (image) => this.setState({showResults: true, image});
 
     render() {
@@ -83,31 +82,13 @@ class ImagePreview extends PureComponent {
                     open={showResults} 
                     handleClose={this.hideResultDialog} 
                     imageToClassify={image} 
+                    info={classificationInfo}
+                    isHotdog={hotdog}
                 />
-                <div>
+                <div style={{visibility: 'hidden'}}>
                     <img id='img-preview' src="#" alt="preview" ref={this.imgToClassify} />
                 </div>
-                {
-                    hotdog != null && (
-                        <div>
-                            <div>
-                                <h3>{`${hotdog ? '': 'not a '}hotdog`}</h3>
-                                <img src={hotdog ? checkmark : error} alt='prediction' />
-                            </div>
-                            <div>
-                                {
-                                    classificationInfo.map(({className, probability}) => (
-                                        <div key={probability}>
-                                            <div>{`classnames: ${className}`}</div>
-                                            <div>{`probability: ${probability}`}</div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>                
-
-                    )
-                }
+                
             </div>
         );
     }
