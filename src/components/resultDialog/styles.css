@@ -1,0 +1,34 @@
+.result-content {
+    text-align: center;
+}
+
+.result-content .error {
+    color: red;
+}
+
+.result-content .success {
+    color: green;
+}
+
+.result-content h2 {
+    text-transform: uppercase;
+}
+
+.result-content .icon-wrapper svg {
+    font-size: 5em;
+}
+
+.result-content .classification-info {
+    text-align: left;
+    padding: 0 5em;
+    color: black;
+}
+
+.result-content .classification-info .classification {
+    font-weight: bold;
+}
+
+.result-content img {
+    max-width: 100%;
+    max-height: 250px;
+}
