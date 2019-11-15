@@ -1,9 +1,9 @@
 .app {
   text-align: center;
+  background-color: #b8babe;
 }
 
 .app .content {
-  background-color: #b8babe;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

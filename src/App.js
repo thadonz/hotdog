@@ -5,10 +5,10 @@ import './App.css';
 const App = () => {
   return (
     <div className='app'>
-      <h1>
-        Hotdog, not Hotdog
-      </h1>
       <div className='content'>
+        <h1>
+          Hotdog, not Hotdog
+        </h1>
         <ImageCapture />
       </div>
     </div>
