@@ -4,11 +4,13 @@ import {Input} from '@material-ui/core';
 import checkmark from '../../assets/checkmark.jpg';
 import error from '../../assets/error.jpg';
 import './styles.css';
+import ResultDialog from '../resultDialog/ResultDialog';
 
 class ImagePreview extends PureComponent {
     state = {
         hotdog: null,
-        classificationInfo: ''
+        classificationInfo: '',
+        image: null
     };
 
     constructor(props) {
@@ -24,6 +26,8 @@ class ImagePreview extends PureComponent {
             const reader = new FileReader();
             
             reader.onload = (e) => {
+                this.showResultDialog(e.target.result);
+
                 this.imgToClassify.current.src = e.target.result;
                 this.classifyImage();
             }
@@ -61,19 +65,25 @@ class ImagePreview extends PureComponent {
         this.setState({hotdog, classificationInfo: classifications});
     };
 
+    hideResultDialog = () => this.setState({showResults: false});
+    showResultDialog = (image) => this.setState({showResults: true, image});
+
     render() {
-        const {hotdog, classificationInfo} = this.state;
+        const {hotdog, classificationInfo, showResults, image} = this.state;
 
         return (
             <div>
-                <div>
-                    <Input 
-                        type="file" 
-                        accept="image/*" 
-                        capture 
-                        onChange={this.readURL}
-                    />
-                </div>
+                <Input 
+                    type="file" 
+                    accept="image/*" 
+                    capture 
+                    onChange={this.readURL}
+                />
+                <ResultDialog 
+                    open={showResults} 
+                    handleClose={this.hideResultDialog} 
+                    imageToClassify={image} 
+                />
                 <div>
                     <img id='img-preview' src="#" alt="preview" ref={this.imgToClassify} />
                 </div>
