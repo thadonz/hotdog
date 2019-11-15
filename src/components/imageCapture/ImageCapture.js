@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import * as mobilenet from '@tensorflow-models/mobilenet';
+import {Input} from '@material-ui/core';
 import checkmark from '../../assets/checkmark.jpg';
 import error from '../../assets/error.jpg';
 import './styles.css';
@@ -13,12 +14,11 @@ class ImagePreview extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.fileInput = React.createRef();
         this.imgToClassify = React.createRef();
     }
 
-    readURL = () => {
-        const input = this.fileInput.current;
+    readURL = (event) => {
+        const input = event.target;
 
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -67,11 +67,10 @@ class ImagePreview extends PureComponent {
         return (
             <div>
                 <div>
-                    <input 
+                    <Input 
                         type="file" 
                         accept="image/*" 
                         capture 
-                        ref={this.fileInput} 
                         onChange={this.readURL}
                     />
                 </div>
