@@ -75,7 +75,6 @@ class ImagePreview extends PureComponent {
                 <Input 
                     type="file" 
                     accept="image/*" 
-                    capture 
                     onChange={this.readURL}
                 />
                 <ResultDialog 
