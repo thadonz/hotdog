@@ -4,11 +4,13 @@ import './App.css';
 
 const App = () => {
   return (
-    <div>
-      <header>
-        Hotdog
-      </header>
-      <ImageCapture />
+    <div className='app'>
+      <h1>
+        Hotdog, not Hotdog
+      </h1>
+      <div className='content'>
+        <ImageCapture />
+      </div>
     </div>
   );
 }
